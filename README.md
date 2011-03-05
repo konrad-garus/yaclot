@@ -36,12 +36,12 @@ Yaclot is a light Clojure conversion library. Use it to convert, parse and forma
 
 ## Supported Conversions
 
-String <-> java.util.Date
-String <-> Integer
-String <-> Double
-String <-> BigDecimal
-String <-> Number (using BigDecimal) 
-nil     -> (anything) gives nil
+    String <-> java.util.Date
+    String <-> Integer
+    String <-> Double
+    String <-> BigDecimal
+    String <-> Number (using BigDecimal) 
+    nil     -> (anything) gives nil
 
 ## Planned features
 
