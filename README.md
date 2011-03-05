@@ -4,7 +4,7 @@ Yaclot is a light Clojure conversion library. Use it to convert, parse and forma
 
 ## Usage
 
-1. Simple conversions:
+### Simple conversions:
 
     (convert "2011-02-12" (to-type java.util.Date))
     ; => #<Date Sat Feb 12 00:00:00 CET 2011>
@@ -18,7 +18,7 @@ Yaclot is a light Clojure conversion library. Use it to convert, parse and forma
     (convert "42e-2" (to-type Number))
     ; => 0.42M
 
-2. Conversions with specified format:
+### Conversions with specified format:
 
     (convert "2/12/11" (using-format "M/dd/yy" (to-type java.util.Date)))
     ; => #<Date Sat Feb 12 00:00:00 CET 2011>
@@ -26,7 +26,7 @@ Yaclot is a light Clojure conversion library. Use it to convert, parse and forma
     (convert 5000.42 (to-type String (using-format "%,.2f")))
     ; => "5,000.42"
 
-3. Bulk-convert maps:
+### Bulk-convert maps:
 
     (map-convert 
       {:dt "2011-02-12" :int 42} 
