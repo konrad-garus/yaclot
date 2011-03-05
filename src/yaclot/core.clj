@@ -52,16 +52,21 @@
 
 (defconvert String Integer #(Integer/parseInt %))
 
-(defconvert Integer String #(String/valueOf %))
-
 (defconvert String Double #(Double/parseDouble %))
-
-(defconvert Double String #(String/valueOf %))
 
 (defconvert String BigDecimal #(new BigDecimal %))
 
-(defconvert BigDecimal String #(.toString %))
+(defconvert String Number #(new BigDecimal %))
 
-; TODO: support nil
-; TODO: support formatting for numbers
-; TODO: error handling
+(defn format-number [n fmt]
+  (if fmt
+    (format fmt n)
+    (str n)))
+
+(defconvert
+  Number
+  String
+  (fn [v conversion-params] (format-number v (:format conversion-params)))
+  nil)
+
+(defconvert nil Object (fn [_]))

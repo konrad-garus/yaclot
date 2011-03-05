@@ -1,6 +1,6 @@
 # yaclot
 
-Yaclot is a Clojure conversion library. Use it to convert, parse and format values between types. 
+Yaclot is a light Clojure conversion library. Use it to convert, parse and format values or records of different types. 
 
 ## Usage
 
@@ -15,10 +15,16 @@ Yaclot is a Clojure conversion library. Use it to convert, parse and format valu
 (convert 42 (to-type String))
 ; => "42"
 
+(convert "42e-2" (to-type Number))
+; => 0.42M
+
 2. Conversions with specified format:
 
 (convert "2/12/11" (using-format "M/dd/yy" (to-type java.util.Date)))
 ; => #<Date Sat Feb 12 00:00:00 CET 2011>
+
+(convert 5000.42 (to-type String (using-format "%,.2f")))
+; => "5,000.42"
 
 3. Bulk-convert maps:
 
@@ -27,6 +33,23 @@ Yaclot is a Clojure conversion library. Use it to convert, parse and format valu
   {:dt (to-type java.util.Date) 
    :int (to-type String)})
 ; => {:dt #<Date Sat Feb 12 00:00:00 CET 2011>, :int "42"}
+
+## Supported Conversions
+
+String <-> java.util.Date
+String <-> Integer
+String <-> Double
+String <-> BigDecimal
+String <-> Number (using BigDecimal) 
+nil     -> (anything) gives nil
+
+## Planned features
+
+Error handling with local bindings rather than throwing exceptions.
+
+Pre-Validation: Assertions on value before conversion (e.g. checking that it's not null or matches a regular expression).
+
+Post-Validation: Assertions after conversion (e.g. checking that parsed number is positive). 
 
 ## License
 

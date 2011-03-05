@@ -33,7 +33,20 @@
 (deftest test-big-decimal-to-string
   (is (= "0.3" (convert (BigDecimal. "0.3") (to-type String)))))
 
-(deftest test-map-convert-1
+(deftest test-string-to-number
+  (is (= 0.42M (convert "0.42" (to-type Number))))
+  (is (= 0.42M (convert "42e-2" (to-type Number))))
+  (is (= 1M (convert "1" (to-type Number)))))
+
+(deftest test-format-number
+  (is (= "5,000.42" (convert 5000.42 (to-type String (using-format "%,.2f"))))) 
+  (is (= "5,000" (convert 5000 (to-type String (using-format "%,d"))))))
+
+(deftest test-convert-nil
+  (is (nil? (convert nil (to-type Number))))
+  (is (nil? (convert nil (to-type String)))))
+
+(deftest test-map-convert
   (let [dt (parse-date "2011-02-12")
         fmt {:d1 (to-type java.util.Date) 
              :d2 (using-format "M/dd/yy" (to-type String))}
