@@ -2,3 +2,4 @@ lib/*
 bin/*
 classes/*
 *.jar
+.settings*
