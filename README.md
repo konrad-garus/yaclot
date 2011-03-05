@@ -6,33 +6,33 @@ Yaclot is a light Clojure conversion library. Use it to convert, parse and forma
 
 1. Simple conversions:
 
-(convert "2011-02-12" (to-type java.util.Date))
-; => #<Date Sat Feb 12 00:00:00 CET 2011>
+    (convert "2011-02-12" (to-type java.util.Date))
+    ; => #<Date Sat Feb 12 00:00:00 CET 2011>
 
-(convert (java.util.Date. 111 1 12) (to-type String))
-; => "2011-02-12"
+    (convert (java.util.Date. 111 1 12) (to-type String))
+    ; => "2011-02-12"
 
-(convert 42 (to-type String))
-; => "42"
+    (convert 42 (to-type String))
+    ; => "42"
 
-(convert "42e-2" (to-type Number))
-; => 0.42M
+    (convert "42e-2" (to-type Number))
+    ; => 0.42M
 
 2. Conversions with specified format:
 
-(convert "2/12/11" (using-format "M/dd/yy" (to-type java.util.Date)))
-; => #<Date Sat Feb 12 00:00:00 CET 2011>
+    (convert "2/12/11" (using-format "M/dd/yy" (to-type java.util.Date)))
+    ; => #<Date Sat Feb 12 00:00:00 CET 2011>
 
-(convert 5000.42 (to-type String (using-format "%,.2f")))
-; => "5,000.42"
+    (convert 5000.42 (to-type String (using-format "%,.2f")))
+    ; => "5,000.42"
 
 3. Bulk-convert maps:
 
-(map-convert 
-  {:dt "2011-02-12" :int 42} 
-  {:dt (to-type java.util.Date) 
-   :int (to-type String)})
-; => {:dt #<Date Sat Feb 12 00:00:00 CET 2011>, :int "42"}
+    (map-convert 
+      {:dt "2011-02-12" :int 42} 
+      {:dt (to-type java.util.Date) 
+       :int (to-type String)})
+    ; => {:dt #<Date Sat Feb 12 00:00:00 CET 2011>, :int "42"}
 
 ## Supported Conversions
 
