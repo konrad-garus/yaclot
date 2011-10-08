@@ -3,13 +3,13 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>yaclot</groupId>
   <artifactId>yaclot</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <version>0.1.2-SNAPSHOT</version>
   <name>yaclot</name>
-  <description>Yaclot is a Clojure conversion library. Use it to convert, parse and format values between types.</description>
+  <description>Yet another Clojure conversion and record transformation library.</description>
   <scm>
     <connection>scm:git:git://github.com/konrad-garus/yaclot.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/konrad-garus/yaclot.git</developerConnection>
-    <tag>c4437fe62d9a65adb8748290600885249a421a15</tag>
+    <tag>4aa4499d1103a528ab02c62fd9954d9d02536428</tag>
     <url>https://github.com/konrad-garus/yaclot</url>
   </scm>
   <build>

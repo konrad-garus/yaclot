@@ -32,8 +32,14 @@
 ; Invidicual Converters
 
 (defn parse-date 
-  ([str] (parse-date str "yyyy-MM-dd"))
-  ([str format] (.parse (java.text.SimpleDateFormat. format) str)))
+  ([arg] (parse-date arg "yyyy-MM-dd"))
+  ([arg format] 
+    (if (coll? format)
+      (if-let [res (first (filter identity (map #(try (parse-date arg %) (catch java.text.ParseException e)) format)))]
+        res
+        (throw (java.text.ParseException. (str "Unparseable date: " arg) 0)))
+      ;(map #(parse-date arg %) format)
+      (.parse (java.text.SimpleDateFormat. format) arg))))
 
 (defn format-date [dt format]
   (.format (java.text.SimpleDateFormat. format) dt))
@@ -49,6 +55,10 @@
   String
   (fn [v conversion-params] (format-date v (:format conversion-params)))
   (using-format "yyyy-MM-dd"))
+
+(defconvert java.util.Date Long #(.getTime %))
+
+(defconvert Long java.util.Date #(new java.util.Date %))
 
 (defconvert String Integer #(Integer/parseInt %))
 

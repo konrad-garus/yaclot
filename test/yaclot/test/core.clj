@@ -6,12 +6,21 @@
 (deftest test-string-to-date
   (let [expect (parse-date "2011-02-12")]
     (is (= expect (convert "2011-02-12" (to-type java.util.Date))))
-    (is (= expect (convert "2/12/11" (using-format "M/dd/yy" (to-type java.util.Date)))))))
+    (is (= expect (convert "2/12/11" (using-format "M/dd/yy" (to-type java.util.Date)))))
+    (is (= expect (convert "2/12/11" (using-format ["yyyy-M-d" "M/dd/yy"] (to-type java.util.Date)))))))
 
 (deftest test-date-to-string
   (let [dt (parse-date "2011-02-12")]
     (is (= "2011-02-12" (convert dt (to-type String))))
     (is (= "2/12/11"(convert dt (using-format "M/dd/yy" (to-type String)))))))
+
+(deftest test-date-to-long
+  (let [dt (parse-date "2011-02-12")]
+    (is (= (.getTime dt) (convert dt (to-type Long))))))
+
+(deftest test-long-to-date
+  (let [dt (parse-date "2011-02-12")]
+    (is (= dt (convert (.getTime dt) (to-type java.util.Date))))))
 
 (deftest test-string-to-integer
   (is (= 1 (convert "1" (to-type Integer)))))

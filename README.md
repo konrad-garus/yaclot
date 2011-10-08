@@ -22,6 +22,11 @@ Yaclot is a light Clojure conversion library. Use it to convert, parse and forma
 
     (convert "2/12/11" (using-format "M/dd/yy" (to-type java.util.Date)))
     ; => #<Date Sat Feb 12 00:00:00 CET 2011>
+    
+    ; This one attempts parsing with each of the formats and returns first result
+    ; which didn't throw ParseException
+    (convert "2/12/11" (using-format ["yyyy-MM-dd" "M/dd/yy"] (to-type java.util.Date)))
+    ; => #<Date Sat Feb 12 00:00:00 CET 2011>
 
     (convert 5000.42 (to-type String (using-format "%,.2f")))
     ; => "5,000.42"
@@ -36,11 +41,12 @@ Yaclot is a light Clojure conversion library. Use it to convert, parse and forma
 
 ## Supported Conversions
 
-    String <-> java.util.Date
+    String <-> Date
     String <-> Integer
     String <-> Double
     String <-> BigDecimal
-    String <-> Number (using BigDecimal) 
+    String <-> Number (using BigDecimal)
+    Date   <-> Long 
     nil     -> (anything) gives nil
 
 ## Planned features
