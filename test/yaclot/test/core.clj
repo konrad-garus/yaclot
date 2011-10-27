@@ -65,3 +65,6 @@
     (is (= 
           {:d1 dt :d2 "2/12/11" :d3 "Something else"}
           (map-convert in fmt)))))
+
+(deftest test-convert-identity
+  (is (= "Test" (convert "Test" (to-type String)) )))

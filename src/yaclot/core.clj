@@ -16,11 +16,18 @@
 
 (defmacro defconvert 
   ([from-type to-type f] 
-    `(defmethod convert [~from-type ~to-type] [val# params#]
-       (~f val#)))
+    `(do
+       (defmethod convert [~from-type ~to-type] [val# params#]
+         (~f val#))
+       (defmethod convert [~from-type ~from-type] [val# params#] (identity val#))
+       (defmethod convert [~to-type ~to-type] [val# params#] (identity val#))
+       ))
   ([from-type to-type f default-conversion-params]
-    `(defmethod convert [~from-type ~to-type] [val# params#]
-       (~f val# (merge ~default-conversion-params params#)))))
+    `(do
+       (defmethod convert [~from-type ~to-type] [val# params#]
+         (~f val# (merge ~default-conversion-params params#)))
+       (defmethod convert [~from-type ~from-type] [val# params#] (identity val#))
+       (defmethod convert [~to-type ~to-type] [val# params#] (identity val#)))))
 
 (defn map-convert [in conversion-params]
   (into {}
@@ -38,7 +45,6 @@
       (if-let [res (first (filter identity (map #(try (parse-date arg %) (catch java.text.ParseException e)) format)))]
         res
         (throw (java.text.ParseException. (str "Unparseable date: " arg) 0)))
-      ;(map #(parse-date arg %) format)
       (.parse (java.text.SimpleDateFormat. format) arg))))
 
 (defn format-date [dt format]

@@ -3,14 +3,14 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>yaclot</groupId>
   <artifactId>yaclot</artifactId>
-  <version>0.1.2-SNAPSHOT</version>
+  <version>0.1.3-SNAPSHOT</version>
   <name>yaclot</name>
   <description>Yet another Clojure conversion and record transformation library.</description>
   <url>https://github.com/konrad-garus/yaclot</url>
   <scm>
     <connection>scm:git:git://github.com/konrad-garus/yaclot.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/konrad-garus/yaclot.git</developerConnection>
-    <tag>9608ce5deec128e95d6bd02d7dc2c757cf1f5549</tag>
+    <tag>e2f5bbb42645b01fc0b0b3e57f7dadadd3abc7d1</tag>
     <url>https://github.com/konrad-garus/yaclot</url>
   </scm>
   <build>

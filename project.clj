@@ -1,4 +1,4 @@
-(defproject yaclot "0.1.2-SNAPSHOT"
+(defproject yaclot "0.1.3-SNAPSHOT"
   :description "Yet another Clojure conversion and record transformation library."
   :url "https://github.com/konrad-garus/yaclot"
   :dependencies [[org.clojure/clojure "1.2.0"]
