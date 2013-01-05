@@ -3,3 +3,5 @@ bin/*
 classes/*
 *.jar
 .settings*
+.lein-failures
+target

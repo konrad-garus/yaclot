@@ -74,6 +74,8 @@
 
 (defconvert String Number #(new BigDecimal %))
 
+(defconvert String Boolean #(Boolean/valueOf %))
+
 (defn format-number [n fmt]
   (if fmt
     (format fmt n)

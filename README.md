@@ -46,6 +46,7 @@ Yaclot is a light Clojure conversion library. Use it to convert, parse and forma
     String <-> Double
     String <-> BigDecimal
     String <-> Number (using BigDecimal)
+    String  -> Boolean
     Date   <-> Long 
     nil     -> (anything) gives nil
 

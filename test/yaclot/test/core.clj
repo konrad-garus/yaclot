@@ -1,6 +1,5 @@
 (ns yaclot.test.core
   (:use [clojure.test])
-  (:use [clojure.contrib.mock])
   (:use [yaclot.core]))
 
 (deftest test-string-to-date
@@ -51,6 +50,11 @@
   (is (= "5,000.42" (convert 5000.42 (to-type String (using-format "%,.2f"))))) 
   (is (= "5,000" (convert 5000 (to-type String (using-format "%,d"))))))
 
+(deftest test-string-to-boolean
+  (is (= false (convert "false" (to-type Boolean))))
+  (is (= false (convert "nope" (to-type Boolean))))
+  (is (= true (convert "true" (to-type Boolean)))))
+
 (deftest test-convert-nil
   (is (nil? (convert nil (to-type Number))))
   (is (nil? (convert nil (to-type String)))))
@@ -65,6 +69,11 @@
     (is (= 
           {:d1 dt :d2 "2/12/11" :d3 "Something else"}
           (map-convert in fmt)))))
+
+(deftest test-map-convert-leaves-unspecified-intact
+  (is (= 
+        {:a 15 :b "Test"}
+        (map-convert {:a "15" :b "Test"} {:a (to-type Integer)}))))
 
 (deftest test-convert-identity
   (is (= "Test" (convert "Test" (to-type String)) )))
