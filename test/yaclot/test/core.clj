@@ -22,6 +22,7 @@
     (is (= expect (convert "2/12/11" (using-format "M/dd/yy" (to-type :sql-date)))))))
 
 (deftest test-string-to-sql-time
+  "X format support JDK 7+"
   (let [expect (java.sql.Time. (.getTime (parse-date "1970-01-01T10:00:00Z" {:format "yyyy-MM-dd'T'HH:mm:ssX"})))]
     (is (= expect (convert "1970-01-01T10:00:00Z" (to-type java.sql.Time))))
     (is (= expect (convert "10:00" (using-format "HH:mm" (to-type java.sql.Time)))))
@@ -66,6 +67,11 @@
   (is (= (BigDecimal. 1) (convert "1" (to-type BigDecimal))))
   (is (= (BigDecimal. "0.33") (convert "0.33" (to-type BigDecimal))))
   (is (= (BigDecimal. "0.33") (convert "0.33" (to-type :decimal)))))
+
+(deftest test-string-long
+  (is (= (Long. 1) (convert "1" (to-type Long))))
+  (is (= (Long. "33") (convert "33" (to-type Long))))
+  (is (= (Long. "10000000000") (convert "10000000000" (to-type :long)))))
 
 (deftest test-integer-to-string
   (is (= "1000" (convert 1000 (to-type String))))
