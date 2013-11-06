@@ -86,7 +86,7 @@
   String 
   java.sql.Timestamp
   (fn [v conversion-params]
-    (let [dt (convert v (to-type java.util.Date conversion-params))]
+    (let [^java.util.Date dt (convert v (to-type java.util.Date conversion-params))]
       (java.sql.Timestamp. (.getTime dt))))
   {})
 
@@ -94,7 +94,7 @@
   String 
   java.sql.Time
   (fn [v conversion-params]
-    (let [dt (convert v (to-type java.util.Date conversion-params))]
+    (let [^java.util.Date dt (convert v (to-type java.util.Date conversion-params))]
       (java.sql.Time. (.getTime dt))))
   (using-format :iso-date-time (in-timezone "UTC")))
 
@@ -102,23 +102,25 @@
   String 
   java.sql.Date
   (fn [v conversion-params]
-    (let [dt (convert v (to-type java.util.Date conversion-params))]
+    (let [^java.util.Date dt (convert v (to-type java.util.Date conversion-params))]
       (java.sql.Date. (.getTime dt))))
   {})
 
-(defconvert java.util.Date Long #(.getTime %))
+(defconvert java.util.Date Long #(.getTime ^java.util.Date %))
 
-(defconvert Long java.util.Date #(new java.util.Date %))
+(defconvert Long java.util.Date #(java.util.Date. ^Long %))
 
 (defconvert String Integer #(Integer/parseInt %))
 
 (defconvert String Double #(Double/parseDouble %))
 
-(defconvert String BigDecimal #(new BigDecimal %))
+(defconvert String Long #(Long/parseLong %))
 
-(defconvert String Number #(new BigDecimal %))
+(defconvert String BigDecimal #(BigDecimal. ^String %))
 
-(defconvert String Boolean #(Boolean/valueOf %))
+(defconvert String Number #(BigDecimal. ^String %))
+
+(defconvert String Boolean #(Boolean/valueOf ^String %))
 
 (defn format-number [n fmt]
   (if fmt
